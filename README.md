@@ -99,8 +99,9 @@ while($row = $result->fetch_assoc()){
 }
 $stmt->close();
 $mysqli->close();
-bash
+```
 
+**pdo:**
 ``bash
 $pdo = new PDO("mysql:host=localhost;dbname=test", "root", "");
 $stmt = $pdo->prepare("SELECT * FROM users WHERE email=:email");
