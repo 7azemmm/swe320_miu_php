@@ -83,3 +83,31 @@
 |--------------------|-------------|
 | `$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)` | Throws exceptions on errors. |
 | `$pdo->errorInfo()` | Returns array with SQLSTATE, driver error code, and driver message. |
+
+
+### f. Example Usage
+
+**MySQLi:**
+```bash
+$mysqli = new mysqli("localhost", "root", "", "test");
+$stmt = $mysqli->prepare("SELECT * FROM users WHERE email=?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+while($row = $result->fetch_assoc()){
+    echo $row['name'];
+}
+$stmt->close();
+$mysqli->close();
+bash
+
+``bash
+$pdo = new PDO("mysql:host=localhost;dbname=test", "root", "");
+$stmt = $pdo->prepare("SELECT * FROM users WHERE email=:email");
+$stmt->execute(['email' => $email]);
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    echo $row['name'];
+}
+$pdo = null;
+
+```
